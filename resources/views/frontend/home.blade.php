@@ -36,7 +36,7 @@
                         </section>
                     </section>
                 </section>
-                @foreach($posts as $post)
+                @foreach($carouselPosts as $post)
                     <div class="carousel-item">
                         <img src="{{ asset('site/images/post/'.$post->photo)}}" class="d-block w-100" alt="{{$post->title}}">
                         <section class="layout"></section>

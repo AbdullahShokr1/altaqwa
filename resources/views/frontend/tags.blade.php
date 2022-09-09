@@ -1,14 +1,19 @@
 <x-front>
-    <section class=" mx-auto py-5"></section>
+    <section class="in-mobile">
+        <section class=" mx-auto py-5"></section>
+        <section class=" mx-auto py-3"></section>
+    </section>
     <!--#2 Start Breadcrumb-->
-    <nav class="breadcrumb" aria-label="breadcrumb">
-        <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="{{route('home.index')}}">الرئيسية</a></li>
-            <li class="breadcrumb-item active" aria-current="page">الوسوم</li>
-        </ol>
-    </nav>
+    <section class="mybreadcrumb">
+        <nav class="breadcrumb" style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="{{route('home.index')}}">الرئيسية</a></li>
+                <li class="breadcrumb-item active" aria-current="page">الوسوم</li>
+            </ol>
+        </nav>
+    </section>
     <!--#2 End Breadcrumb-->
-    <!--#4 Start Categories-->
+    <!--#4 Start Tags-->
     <section id="Categories" class="container marketing">
         <section class="row my-4 justify-content-center">
             <section class="col-md-3 text-center my-3">

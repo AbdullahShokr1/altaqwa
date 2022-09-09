@@ -33,4 +33,11 @@
     <section class=" mx-auto py-3"></section>
     <!--#4 End Post-->
     <section class=" mx-auto py-5"></section>
+    @section('call')
+        <a href="tel:{{$post->telephone}}" title="اتصل الان">
+            <section class="call-me my-button button2">
+                <i class="fa fa-phone-alt"></i>
+            </section>
+        </a>
+    @endsection
 </x-front>

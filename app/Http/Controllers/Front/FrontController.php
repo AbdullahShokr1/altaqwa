@@ -28,6 +28,7 @@ class FrontController extends Controller
         $settings = Settings::query()->first();
         return view('frontend.home',compact('categories','settings'),[
             'posts'=> Post::query()->get(),
+            'carouselPosts'=> Post::query()->limit(2)->get(),
             'imposts'=> Post::latest()->take(12)->get(),
             'blogs'=> Blog::inRandomOrder()->limit(9)->get(),
             'products'=> Product::inRandomOrder()->limit(6)->get(),
@@ -107,14 +108,24 @@ class FrontController extends Controller
      */
     public function blog()
     {
-        return view('frontend.blog.index');
+        return view('frontend.blog.index',[
+            'posts'=> Blog::query()->get(),
+            'ads'=> Post::query()->inRandomOrder()->limit(5)->get(),
+            'categories'=> BCategory::query()->get(),
+            'products'=> Product::query()->inRandomOrder()->limit(1)->get(),
+        ]);
 
     }
     public function post($slug)
     {
         $post = Blog::where('slug','=',$slug)->first();
         if($post){
-            return view('frontend.blog.post',compact('post'));
+            return view('frontend.blog.post',compact('post'),[
+                'posts'=> Blog::query()->get(),
+                'ads'=> Post::query()->inRandomOrder()->limit(5)->get(),
+                'categories'=> BCategory::query()->get(),
+                'products'=> Product::query()->inRandomOrder()->limit(1)->get(),
+            ]);
         }else{
             return abort(404);
         }
