@@ -176,11 +176,26 @@
                         @foreach($products as $product)
                             <section class="col">
                                 <section class="card shadow-sm">
-                                    @foreach(explode('|',$product->photos) as $photo)
-                                        <img src="{{asset('site\images\products/'.$photo)}}" class="my-carousel d-block w-100" alt="{{$product->title}}">
-                                        <section class="layout"></section>
-                                        <h3><a class="text-center" href="{{route('home.product',$product->slug)}}">{{$product->title}}</a></h3>
-                                    @endforeach
+
+                                    <section id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+                                        <section class="carousel-inner">
+                                            @foreach(explode('|',$product->photos) as $photo)
+                                                <section class="carousel-item @if ($loop->first) active @endif">
+                                                    <img src="{{asset('site\images\products/'.$photo)}}" class="my-carousel d-block w-100" alt="{{$product->title}}">
+                                                </section>
+                                            @endforeach
+                                            <section class="layout"></section>
+                                        </section>
+                                        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+                                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                            <span class="visually-hidden">Previous</span>
+                                        </button>
+                                        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+                                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                            <span class="visually-hidden">Next</span>
+                                        </button>
+                                    </section>
+                                    <h3><a class="text-center" href="{{route('home.product',$product->slug)}}">{{$product->title}}</a></h3>
                                 </section>
                             </section>
                         @endforeach

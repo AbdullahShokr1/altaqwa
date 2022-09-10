@@ -30,6 +30,13 @@
                     <section class="row">
                         {!! $post->my_content !!}
                     </section>
+                    <section class="row g-0 p-3 tag">
+                        @foreach($post->tagblog as $tag)
+                            <section class="tags">
+                                <a  href="{{route('home.blog.tag',$tag->btag->slug)}}">{{$tag->btag->title}}</a>
+                            </section>
+                        @endforeach
+                    </section>
                     <section class="row g-0 p-3">
                         ADS
                     </section>

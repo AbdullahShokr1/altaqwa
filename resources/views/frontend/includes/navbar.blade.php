@@ -95,12 +95,12 @@
                                     <i class="fa fa-user" aria-hidden="true"></i>
                                 </button>
                                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                                    <li><a class="dropdown-item" href="#">Action</a></li>
+                                    <li><a class="dropdown-item" href="{{route('home.profile',Auth::user('user')->name)}}">الملف الشخصي</a></li>
                                     <div class="hidden fixed top-0 right-0 px-6 py-4 sm:block">
                                             <a class="dropdown-item" href="{{ route('logout') }}"
                                                onclick="event.preventDefault();
                                                         document.getElementById('logout-form').submit();">
-                                                {{ __('Logout') }}
+                                                تسجيل الخروج
                                             </a>
                                             <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                                                 @csrf
