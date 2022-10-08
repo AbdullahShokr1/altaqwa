@@ -16,8 +16,8 @@ class CreateSettingsTable extends Migration
         Schema::create('settings', function (Blueprint $table) {
             $table->id();
             $table->string('logo')->default('logo.png');
-            $table->string('name')->default('التقوي');
-            $table->text('description')->default('افضل شركة مكافحة حشرات في الشرق الاوسط ');
+            $table->string('name');
+            $table->text('description');
             $table->string('social')->default('wwww.facebook.com|wwww.facebook.com|wwww.facebook.com|wwww.facebook.com');
             $table->string('photo')->default('banner.jpg');
             $table->timestamps();
