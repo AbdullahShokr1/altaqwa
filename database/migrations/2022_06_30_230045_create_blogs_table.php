@@ -18,7 +18,7 @@ class CreateBlogsTable extends Migration
             $table->string('title');
             $table->text('description');
             $table->string('keywords');
-            $table->text('my_content');
+            $table->longText('my_content');
             $table->string('slug');
             $table->foreignId('category_id')->constrained()->references('id')->on('b_categories')->onDelete('cascade');
             $table->foreignId('writer_id')->constrained()->references('id')->on('admins')->onDelete('cascade');

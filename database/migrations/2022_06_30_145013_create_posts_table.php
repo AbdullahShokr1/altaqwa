@@ -18,7 +18,7 @@ class CreatePostsTable extends Migration
             $table->string('title');
             $table->text('description');
             $table->string('keywords');
-            $table->text('my_content');
+            $table->longText('my_content');
             $table->string('telephone');
             $table->string('slug');
             $table->foreignId('category_id')->constrained()->references('id')->on('categories')->onDelete('cascade');

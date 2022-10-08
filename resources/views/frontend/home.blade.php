@@ -14,7 +14,7 @@
             <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
         </section>
         <section class="carousel-inner">
-            @if(($posts->count())<0)
+            @if(($posts->count())<0 && $settings)
                 <section class="carousel-item active">
                     <img src="{{asset('site/images/'.$settings->photo)}}" class="my-carousel d-block w-100" alt="{{$settings->name}}">
                     <section class="layout"></section>
@@ -26,16 +26,18 @@
                     </section>
                 </section>
             @else
-                <section class="carousel-item active">
-                    <img src="{{asset('site/images/'.$settings->photo)}}" class="my-carousel d-block w-100"  alt="{{$settings->name}}">
-                    <section class="layout"></section>
-                    <section class="container">
-                        <section class="carousel-caption">
-                            <p class="h1">{{$settings->name}}</p>
-                            <h1>{{$settings->description}}</h1>
+                @if($settings)
+                    <section class="carousel-item active">
+                        <img src="{{asset('site/images/'.$settings->photo)}}" class="my-carousel d-block w-100"  alt="{{$settings->name}}">
+                        <section class="layout"></section>
+                        <section class="container">
+                            <section class="carousel-caption">
+                                <p class="h1">{{$settings->name}}</p>
+                                <h1>{{$settings->description}}</h1>
+                            </section>
                         </section>
                     </section>
-                </section>
+                @endif
                 @foreach($carouselPosts as $post)
                     <div class="carousel-item">
                         <img src="{{ asset('site/images/post/'.$post->photo)}}" class="d-block w-100" alt="{{$post->title}}">
@@ -119,7 +121,9 @@
     <!--#3 Start Info-->
     <section id="Info" class="px-4 py-5 text-center">
         <section class="container d-flex justify-content-cente ">
-            <img class="info-img d-block mx-auto" src="{{asset('site/images/'.$settings->logo)}}" alt="{{$settings->name}}" width="72" height="57">
+            @if($settings)
+                <img class="info-img d-block mx-auto" src="{{asset('site/images/'.$settings->logo)}}" alt="{{$settings->name}}" width="72" height="57">
+            @endif
         </section>
         <p class="display-5 fw-bold h1">من نحن</p>
         <section class="col-lg-6 mx-auto">

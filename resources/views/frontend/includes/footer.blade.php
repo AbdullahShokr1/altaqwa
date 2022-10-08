@@ -63,6 +63,7 @@
 <script src={{URL::asset('site/js/all.min.js')}}></script>
 <script src={{URL::asset('site/js/myscript.js')}}></script>
 <script src={{URL::asset('site/js/main.js')}}></script>
+@yield('script')
 <!--End JS Files-->
 </body>
 

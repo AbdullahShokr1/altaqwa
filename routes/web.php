@@ -39,13 +39,16 @@ Route::middleware(['auth'])->namespace("Front")->name("home.")->group(function()
 });
 Route::namespace("Dashboard")->name("home.")->group(function(){
     Route::put("/profile/update/{user}","UserController@updateProfile")->name('u-profile');
+    Route::middleware(['auth'])->group(function(){
+        Route::resource("comment",'CommentController',['except' => [ 'show','create','edit','update','destroy','index']]);
+    });
 });
 Route::namespace("Front")->prefix("/")->name("home.")->group(function(){
     Route::get("/","FrontController@index")->name('index');
     Route::get('tag/{slug}','FrontController@tag')->name('tag');
     Route::get('tag/','FrontController@tags')->name('tags');
     Route::get('category','FrontController@categories')->name('categories');
-    Route::get('category/{slug}','FrontController@category')->name('category');
+    //Route::get('category/{slug}','FrontController@category')->name('category');
     //Start Route for Blog >>> that Contain (Post/Tags/Category)
     Route::prefix("blog")->name("blog.")->group(function(){
         Route::get("/",'FrontController@blog')->name('index');
@@ -57,10 +60,27 @@ Route::namespace("Front")->prefix("/")->name("home.")->group(function(){
     });
     //End Route for Blog >>> that Contain (Post/Tags/Category)
     /***This Route has The Slug***/
+    Route::get("/feed.xml","RSSFeedController@index")->name('rss');
+    Route::get("/feed/","RSSFeedController@redirect");
+    //<<< The Start Sitemap >>>//
+    /*** Start This Routes For Sitemap ***/
+    Route::get("/sitemap.xml","SitemapController@index")->name('sitemap');
+    Route::get("/post-sitemap.xml","SitemapController@post")->name('post-sitemap');
+    Route::get("/category-sitemap.xml","SitemapController@category")->name('category-sitemap');
+    Route::get("/page-sitemap.xml","SitemapController@page")->name('page-sitemap');
+    Route::get("/blog-sitemap.xml","SitemapController@blog")->name('blog-sitemap');
+    Route::get("/category-blog-sitemap.xml","SitemapController@Cblog")->name('C-blog-sitemap');
+    Route::get("/tags-blog-sitemap.xml","SitemapController@Tblog")->name('T-blog-sitemap');
+    Route::get("/product-sitemap.xml","SitemapController@product")->name('product-sitemap');
+    Route::get("/images-sitemap.xml","SitemapController@images")->name('images-sitemap');
+    //<<< The End Sitemap >>>//
+    /*** End This Routes For Sitemap ***/
+    Route::get("/search","FrontController@search")->name('search');
     Route::get("/product/","FrontController@products")->name('products');
     Route::get("/product/{slug}","FrontController@product")->name('product');
+    Route::get("page/{slug}","FrontController@page")->name('page');
     Route::get("/{category}/{slug}","FrontController@PostAds")->name('post');
-    Route::get("/{slug}","FrontController@page")->name('page');
+    Route::get('/{category}','FrontController@category')->name('category');
 });
 
 

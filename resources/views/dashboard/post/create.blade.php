@@ -127,6 +127,9 @@
                     height: 1600,
                     language:'ar',
                     directionality:'rtl',
+                    relative_urls : false,
+                    remove_script_host : false,
+                    convert_urls : true,
                     plugins:[
                         'advlist autolink lists link image charmap print preview hr anchor pagebreak',
                         'searchreplace wordcount visualblocks visualchars code fullscreen',
@@ -138,6 +141,13 @@
                     image_class_list: [
                         {title: 'Responsive', value: 'img-responsive'}
                     ],
+                    setup: function(ed) {
+                        ed.on('NodeChange', function(e) {
+                            e.element.parentNode.querySelectorAll('img:not([loading=lazy])').forEach(img => {
+                                img.setAttribute('loading', 'lazy');
+                            });
+                        });
+                    },
                     file_picker_callback (callback, value, meta) {
                         let x = window.innerWidth || document.documentElement.clientWidth || document.getElementsByTagName('body')[0].clientWidth
                         let y = window.innerHeight|| document.documentElement.clientHeight|| document.getElementsByTagName('body')[0].clientHeight

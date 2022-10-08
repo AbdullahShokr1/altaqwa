@@ -18,7 +18,7 @@ class CreatePagesTable extends Migration
             $table->string('title');
             $table->text('description');
             $table->string('keywords');
-            $table->text('my_content');
+            $table->longText('my_content');
             $table->string('slug');
             $table->foreignId('writer_id')->constrained()->references('id')->on('admins')->onDelete('cascade');
             $table->string('photo')->nullable();

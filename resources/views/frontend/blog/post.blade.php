@@ -1,4 +1,7 @@
 <x-front>
+    @section('style')
+        <script src="{{ asset('js/share.js') }}"></script>
+    @stop
     <section class="in-mobile">
         <section class=" mx-auto py-5"></section>
         <section class=" mx-auto py-3"></section>
@@ -29,6 +32,7 @@
                 <section class="col-lg-8 r-blog post-img">
                     <section class="row">
                         {!! $post->my_content !!}
+                        {!! Share::currentPage()->facebook(); !!}
                     </section>
                     <section class="row g-0 p-3 tag">
                         @foreach($post->tagblog as $tag)
@@ -53,7 +57,7 @@
                                             </div>
                                         </div>
                                         <div class="col-md-8 col-8">
-                                            <h5 class="mt-2 mb-1">{{$comment->user}}</h5>
+                                            <h5 class="mt-2 mb-1">{{$comment->name}}</h5>
                                             <div class="mb-2">
                                                 <div class="rating" style="color: #ffd814;">
                                                 </div>
@@ -74,26 +78,24 @@
                     </section>
                     <section class="row g-0 p-3">
                         @if(Auth::user('user'))
-                            <form method="POST" action="{{ route('dashboard.comment.store')}}">
+                            <form method="POST" action="{{ route('home.comment.store')}}">
                                 @csrf
                                 <div class="card-body">
                                     <div class="form-group">
-                                        <label for="exampleInputEmail1">name</label>
-                                        <input type="text" name="name" value="{{old('name')}}" class="form-control" id="exampleInputEmail1" placeholder="Enter Your Name">
+                                        <input type="text" name="name" value="{{Auth::user('user')->name}}" hidden class="form-control" id="exampleInputEmail1" placeholder="Enter Your Name">
                                     </div>
                                     @error('name')
                                     {{$message}}
                                     @enderror
                                     <div class="form-group">
-                                        <label for="exampleInputEmail2">email</label>
-                                        <input type="email" name="email" value="{{old('email')}}" class="form-control" id="exampleInputEmail2" placeholder="Enter Your Email">
+                                        <input type="email" name="email" value="{{Auth::user('user')->email}}" hidden class="form-control" id="exampleInputEmail2" placeholder="Enter Your Email">
                                     </div>
                                     @error('email')
                                     {{$message}}
                                     @enderror
                                     <div class="form-group">
                                         <label for="exampleInputPassword3">Comment</label>
-                                        <textarea rows="4", cols="54" id="comment" name="comment" style="resize:none">{{old('comment')}}</textarea>
+                                        <textarea rows="4" cols="54" id="comment" name="comment" style="resize:none">{{old('comment')}}</textarea>
                                     </div>
                                     @error('comment')
                                     {{$message}}
@@ -107,7 +109,6 @@
                             </form>
                         @else
                             <p>قم <span><a href="{{route('login')}}">بالتسجيل</a></span> حتي تتمكن من التعليق</p>
-
                         @endif
                     </section>
                 </section>

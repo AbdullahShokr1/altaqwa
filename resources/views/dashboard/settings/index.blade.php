@@ -27,7 +27,9 @@
                         <label for="exampleInputFile">logo</label>
                         <div class="input-group">
                             <div class="ml-2 col-sm-12">
-                                <img src="{{asset('site\images/'.$settings->logo)}}" id="preview" class="img-thumbnail">
+                                @if($settings)
+                                    <img src="{{asset('site\images/'.$settings->logo)}}" id="preview" class="img-thumbnail">
+                                @endif
                             </div>
                         </div>
                     </div>

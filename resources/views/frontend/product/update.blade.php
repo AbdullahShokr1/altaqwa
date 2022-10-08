@@ -47,13 +47,9 @@
                 <div class="form-group">
                     <label for="exampleInputFile">images</label>
                     <div class="input-group">
-                        <input type="file" name="photos[]" value="{{$product->photos}}" class="file" multiple accept="image/*" >
                         <div class="input-group my-3">
                             <br/>
-                            <input type="text" name='photos[]' value="{{$product->photos}}" class="form-control" disabled placeholder="Upload File" id="file" multiple accept="image/*">
-                            <div class="input-group-append">
-                                <button type="button" class="browse btn btn-primary">Browse...</button>
-                            </div>
+                            <input type="file" name='photos[]' value="{{$product->photos}}" class="form-control" placeholder="Upload File" id="fileName" multiple accept="image/*">
                         </div>
                         <div class="ml-2 col-sm-12">
                             @if($product->photos == null)
@@ -80,6 +76,32 @@
     </section>
     <!--#4 End Categories-->
     <section class=" mx-auto py-5"></section>
+    @section('script')
+        <script>
+            $(function(){
+                $("input[type = 'file']").change(function(){
+                    var $fileUpload = $("input[type='file']");
+                    if (parseInt($fileUpload.get(0).files.length)+{{count(explode('|',$product->photos))}} > 10){
+                        alert("مسموح فقط برفع 10 صور حاول رفع الصور مرة اخري");
+                        document.getElementById("fileName").value = null;
+                    }
+                });
+            });
+
+            //file just upload images
+            function validateFileType(){
+                var fileName = document.getElementById("fileName").value;
+                var idxDot = fileName.lastIndexOf(".") + 1;
+                var extFile = fileName.substr(idxDot, fileName.length).toLowerCase();
+                if (extFile==="jpg" || extFile==="jpeg" || extFile==="png"){
+                    //TO DO
+                }else{
+                    document.getElementById("fileName").value = null;
+                    alert("يسمح فقط برفع الصور ذات الامتدادات التالبة jpg/jpeg/png");
+                }
+            }
+        </script>
+    @endsection
 </x-front>
 
 

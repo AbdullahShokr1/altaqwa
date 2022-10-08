@@ -107,6 +107,20 @@
                     height: 1600,
                     language:'ar',
                     directionality:'rtl',
+                    relative_urls : false,
+                    remove_script_host : false,
+                    convert_urls : true,
+                    image_class_list: [
+                        {title: 'Responsive', value: 'img-responsive'},
+                        {title: 'edit', value: 'img-edit'},
+                    ],
+                    setup: function(ed) {
+                        ed.on('NodeChange', function(e) {
+                            e.element.parentNode.querySelectorAll('img:not([loading=lazy])').forEach(img => {
+                                img.setAttribute('loading', 'lazy');
+                            });
+                        });
+                    },
                     plugins:[
                         'advlist autolink lists link image charmap print preview hr anchor pagebreak',
                         'searchreplace wordcount visualblocks visualchars code fullscreen',

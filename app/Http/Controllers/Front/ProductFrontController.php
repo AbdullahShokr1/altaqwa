@@ -33,7 +33,7 @@ class ProductFrontController extends Controller
             'photos'=> implode('|',$photos),
         ];
         Product::create($my_product,$request->validated());
-        return redirect()->back()->with(['success'=>'Product Added Successfully']) ;
+        return redirect()->route('home.profile',Auth::user('user')->name)->with(['success'=>'Product Added Successfully']) ;
     }
 
     public function destroy(Product $id)

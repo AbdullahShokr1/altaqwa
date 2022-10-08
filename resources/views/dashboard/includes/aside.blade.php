@@ -157,6 +157,14 @@
                     </a>
                 </li>
                 <li class="nav-item">
+                    <a href="{{url('dashboard/menu/manage-menus')}}" class="nav-link">
+                        <i class="nav-icon fas fa-cogs"></i>
+                        <p>
+                            Menu
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item">
                     <a href="{{route('dashboard.settings')}}" class="nav-link">
                         <i class="nav-icon fas fa-cogs"></i>
                         <p>

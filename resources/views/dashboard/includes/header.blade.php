@@ -27,6 +27,7 @@
     <link rel="stylesheet" href="{{URL::asset('dashboardfile/plugins/daterangepicker/daterangepicker.css')}}">
     <!-- summernote -->
     <link rel="stylesheet" href="{{URL::asset('dashboardfile/plugins/summernote/summernote-bs4.min.css')}}">
+    @yield('script-a')
     <style>
         .pagination {
             align-items: center;

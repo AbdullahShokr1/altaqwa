@@ -15,6 +15,7 @@
     <link rel="stylesheet" href="{{URL::asset('site/css/main.css')}}" />
     <link rel="stylesheet" href="{{URL::asset('site/css/darkmode.css')}}" />
     <!--End Style Files-->
+    @yield('style')
 </head>
 <body>
 

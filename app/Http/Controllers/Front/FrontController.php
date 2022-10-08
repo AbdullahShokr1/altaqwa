@@ -19,6 +19,7 @@ use App\Models\Tag;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Jorenvh\Share\Share;
 
 
 class FrontController extends Controller
@@ -46,7 +47,7 @@ class FrontController extends Controller
 
     public function PostAds($category,$slug){
         $post = Post::with('category')->where('slug','=',$slug)->first();
-        if($post){
+        if($post && $post->category->slug == $category){
             return view('frontend.post',compact('post'));
         }else{
             return abort(404);
@@ -78,8 +79,8 @@ class FrontController extends Controller
         return view('frontend.categories',compact('categories'));
     }
 
-    public function category($slug){
-        $myCategory = Category::where('slug','=',$slug)->first();
+    public function category($category){
+        $myCategory = Category::where('slug','=',$category)->first();
         if($myCategory){
             return view('frontend.category',compact('myCategory'));
         }else{
@@ -119,8 +120,19 @@ class FrontController extends Controller
     public function post($slug)
     {
         $post = Blog::where('slug','=',$slug)->first();
+        $shareButtons = \Share::page(
+            'https://www.itsolutionstuff.com',
+            'Your share text comes here',
+        )
+            ->facebook()
+            ->twitter()
+            ->linkedin()
+            ->telegram()
+            ->whatsapp()
+            ->reddit();
+
         if($post){
-            return view('frontend.blog.post',compact('post'),[
+            return view('frontend.blog.post',compact('post','shareButtons'),[
                 'posts'=> Blog::query()->get(),
                 'ads'=> Post::query()->inRandomOrder()->limit(5)->get(),
                 'categories'=> BCategory::query()->get(),
@@ -234,6 +246,12 @@ class FrontController extends Controller
      * End Functions of Review
      *
      */
+
+    public function search(){
+        $search_text =$_GET['query'];
+        $posts= Post::where('title','LIKE','%'.$search_text.'%')->get();
+        return view('frontend.search',compact('posts'));
+    }
 
 
 

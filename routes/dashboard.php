@@ -1,6 +1,7 @@
 <?php
 
 
+use App\Http\Controllers\Dashboard\MenuController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -22,7 +23,7 @@ Route::namespace("Dashboard")->prefix("dashboard")->name("dashboard.")->group(fu
         Route::resource("post",'PostController',['except' => [ 'show' ]]);
         Route::resource("page",'PageController',['except' => [ 'show' ]]);
         Route::resource("product",'ProductController',['except' => [ 'show' ]]);
-        Route::resource("comment",'CommentController',['except' => [ 'show','create','edit','update' ]]);
+        Route::resource("comment",'CommentController',['except' => [ 'show','create','edit','update','store']]);
         Route::resource("review",'ReviewController',['except' => [ 'show','create','edit','store','update']]);
         //Start Route for Blog >>> that Contain (Post/Tags/Category)
         Route::prefix("blog")->name("blog.")->group(function(){
@@ -39,6 +40,19 @@ Route::namespace("Dashboard")->prefix("dashboard")->name("dashboard.")->group(fu
         Route::get('settings','SettingsController@index')->name('settings');
         Route::get('settings/edit/{id}','SettingsController@edit')->name('edit-settings');
         Route::put('settings/update/{id}','SettingsController@update')->name('update-settings');
+        //Route for menu
+        Route::name("menu.")->prefix("menu")->group(function(){
+            Route::get('manage-menus/{id?}',[MenuController::class,'index']);
+            Route::post('create-menu',[MenuController::class,'store']);
+            Route::get('add-categories-to-menu',[MenuController::class,'addCatToMenu'])->name('add-categories');
+            Route::get('add-post-to-menu',[MenuController::class,'addPostToMenu'])->name('add-post');
+            Route::get('add-custom-link',[MenuController::class,'addCustomLink'])->name('add-link');
+            Route::get('update-menu',[MenuController::class,'updateMenu']);
+            Route::post('update-menuitem/{id}',[MenuController::class,'updateMenuItem']);
+            Route::get('delete-menuitem/{id}/{key}/{in?}',[MenuController::class,'deleteMenuItem']);
+            Route::get('delete-menu/{id}',[MenuController::class,'destroy']);
+            Route::get('menus-create',[MenuController::class,'create'])->name('create');
+        });
     });
 });
 require __DIR__.'/admin.php';

@@ -130,6 +130,20 @@
                     height: 1600,
                     language:'ar',
                     directionality:'rtl',
+                    relative_urls : false,
+                    remove_script_host : false,
+                    convert_urls : true,
+                    image_class_list: [
+                        {title: 'Responsive', value: 'img-responsive'},
+                    ],
+                    setup: function(ed) {
+                        ed.on('NodeChange', function(e) {
+                            e.element.parentNode.querySelectorAll('img:not([loading=lazy])').forEach(img => {
+                                img.setAttribute('loading', 'lazy');
+                            });
+                        });
+                    },
+                    // extended_valid_elements : "img[class|src|border=0|alt|title|hspace|vspace|width|height|align|onmouseover|onmouseout|name|loading=lazy]",
                     plugins:[
                         'advlist autolink lists link image charmap print preview hr anchor pagebreak',
                         'searchreplace wordcount visualblocks visualchars code fullscreen',

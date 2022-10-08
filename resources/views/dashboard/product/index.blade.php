@@ -52,6 +52,9 @@
                             Photo
                         </th>
                         <th>
+                            user
+                        </th>
+                        <th>
                             Slug
                         </th>
                         <th style="width: 20%">
@@ -71,6 +74,9 @@
                                 @foreach(explode('|',$product->photos) as $photo)
                                     <img src="{{asset('site/images/products/'.$photo)}}" alt="sad">
                                 @endforeach
+                            </td>
+                            <td>
+                                {{$product->user->name}}
                             </td>
                             <td class="project-actions text-right">
                                 <a class="btn btn-primary btn-sm" target="_blank" href="{{route('home.product',$product->slug)}}">
